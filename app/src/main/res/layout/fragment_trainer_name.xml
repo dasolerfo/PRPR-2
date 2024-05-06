@@ -15,18 +15,20 @@
         android:text="@string/trainer_edit_name"
         android:textColor="@color/vermell"
         android:textSize="30sp"
-        tools:layout_editor_absoluteY="16dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="130dp" />
 
     <EditText
         android:id="@+id/editNameTrainer"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="80dp"
         android:ems="10"
-        android:inputType="text"
+        android:gravity="center_horizontal"
         android:hint="@string/trainer_hint"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trainerNameTextView" />
 

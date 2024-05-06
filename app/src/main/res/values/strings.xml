@@ -8,4 +8,6 @@
     <string name="shop_message">Welcome Trainer!</string>
     <string name="trainer_edit_name">Change the name of your trainer</string>
     <string name="trainer_hint">Write a name:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/firstFragment"
-        android:icon="@drawable/pokeball"
+        android:icon="@drawable/baseline_catching_pokemon_24"
         android:title="@string/pokedex"/>
     <item
         android:id="@+id/secondFragment"
-        android:icon="@drawable/game"
+        android:icon="@drawable/baseline_person_24"
         android:title="@string/user"/>
     <item
         android:id="@+id/thirdFragment"
-        android:icon="@drawable/pokecoin"
+        android:icon="@drawable/baseline_shopping_cart_24"
         android:title="@string/shop"/>
 </menu>
