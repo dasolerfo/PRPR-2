@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PokeDexLS</string>
+    <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="pokedex">Pokèdex</string>
+    <string name="shop">Shop</string>
+    <string name="user">User</string>
+    <string name="shop_message">Welcome Trainer!</string>
+    <string name="trainer_edit_name">Change the name of your trainer</string>
+    <string name="trainer_hint">Write a name:</string>
 </resources>
