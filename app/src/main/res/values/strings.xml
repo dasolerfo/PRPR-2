@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">PokeDexLS</string>
+    <string name="shop">Shop</string>
+    <string name="text_pokeball">Price: 200€</string>
+    <string name="text_superball">Price: 500€</string>
+    <string name="text_ultraball">Price: 1.500€</string>
+    <string name="text_masterball">Price: 100.000€</string>
+    <string name="buy">0u</string>
+    <string name="prova_monedes">0€</string>
+    <string name="mas">+</string>
+    <string name="menos">-</string>
+    <string name="compra_incorrecte">No tens suficients diners!</string>
+    <string name="compra_correcte">Compra realitzada correctament!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

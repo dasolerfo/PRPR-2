@@ -5,6 +5,6 @@ import androidx.fragment.app.Fragment;
 public class CreateFragment extends MainActivity{
     @Override
     protected Fragment createFragment() {
-        return null;
+        return new ShopFragment();
     }
 }
