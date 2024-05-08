@@ -10,6 +10,6 @@
         android:title="@string/user"/>
     <item
         android:id="@+id/thirdFragment"
-        android:icon="@drawable/baseline_shopping_cart_24"
+        android:icon="@drawable/carrito_compra"
         android:title="@string/shop"/>
 </menu>

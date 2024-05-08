@@ -8,5 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="vermell">#F80000</color>
+    <color name="red">#F80000</color>
+    <color name="redpokeball">#ee1515</color>
+    <color name="superball">#0048ba</color>
+    <color name="ultaball">#e7e230</color>
+    <color name="masterball">#6a329f</color>
+    <color name="gray">#4F4F4F</color>
+    <color name="lightgray">#C6C6C6</color>
 </resources>

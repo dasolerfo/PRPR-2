@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:fontFamily="sans-serif-black"
-        android:textColor="@color/vermell"
+        android:textColor="@color/red"
         android:textSize="40sp"
         android:text="fragment 1" />
 

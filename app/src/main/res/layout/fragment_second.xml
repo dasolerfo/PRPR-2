@@ -15,7 +15,7 @@
         android:fontFamily="sans-serif-black"
         android:gravity="center_horizontal"
         android:text="@string/shop_message"
-        android:textColor="@color/vermell"
+        android:textColor="@color/red"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

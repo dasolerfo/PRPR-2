@@ -13,7 +13,7 @@
         android:fontFamily="sans-serif-black"
         android:gravity="center_horizontal"
         android:text="@string/trainer_edit_name"
-        android:textColor="@color/vermell"
+        android:textColor="@color/red"
         android:textSize="30sp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"

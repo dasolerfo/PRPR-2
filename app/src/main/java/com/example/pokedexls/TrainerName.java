@@ -44,7 +44,7 @@ public class TrainerName extends Fragment {
         View view = inflater.inflate(R.layout.fragment_trainer_name, container, false);
 
         EditText editNameTrainer = view.findViewById(R.id.editNameTrainer);
-        
+
         editNameTrainer.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
