@@ -1,13 +1,14 @@
 package com.example.pokedexls;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pokedexls.Entity.Pokemon;
+import com.example.pokedexls.Entity.PokemonColor;
+import com.example.pokedexls.Entity.TypeP;
 import com.example.pokedexls.placeholder.PlaceholderContent.PlaceholderItem;
 import com.example.pokedexls.databinding.FragmentPokedexBinding;
 import com.squareup.picasso.Picasso;
@@ -38,8 +39,10 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
+        TypeP type = mValues.get(position).getTypes()[0].getTypeP();
+        holder.itemView.setBackgroundColor(PokemonColor.valueOf(type.getName()).getColor());
         Picasso.get().load(mValues.get(position).getSprites().getFront_default()).into(holder.pokeFoto);
-        holder.pokeNom.setText(mValues.get(position).getName());
+        holder.pokeNom.setText(mValues.get(position).getName().toUpperCase());
         //holder.mIdView.setText(mValues.get(position).id);
         //holder.mContentView.setText(mValues.get(position).content);
     }
@@ -63,6 +66,7 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
         public final ImageView pokeFoto;
         public final TextView pokeNom;
         public Pokemon mItem;
+
 
         public ViewHolder(FragmentPokedexBinding binding) {
             super(binding.getRoot());

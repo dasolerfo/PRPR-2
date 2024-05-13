@@ -18,4 +18,8 @@ public class Pokemon implements Serializable {
     public String getName() {
         return name;
     }
+
+    public PokemonType[] getTypes() {
+        return types;
+    }
 }
