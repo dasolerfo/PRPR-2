@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/firstFragment"
+        android:icon="@drawable/baseline_catching_pokemon_24"
+        android:title="@string/pokedex"/>
+    <item
+        android:id="@+id/secondFragment"
+        android:icon="@drawable/baseline_person_24"
+        android:title="@string/user"/>
+    <item
+        android:id="@+id/thirdFragment"
+        android:icon="@drawable/carrito_compra"
+        android:title="@string/shop"/>
+</menu>
