@@ -108,9 +108,17 @@ public class PokedexFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            adapter = new MyPokemonRecyclerViewAdapter();
-            recyclerView.setAdapter(adapter);
-            demanarNousPokemons();
+
+            if (pokemonDao.haFetCrida()) {
+                adapter = new MyPokemonRecyclerViewAdapter();
+                recyclerView.setAdapter(adapter);
+                demanarNousPokemons();
+            } else {
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+               // pokemonDao.resetPointers();
+            }
+
 
             nestedScrollView.setOnScrollChangeListener(new  NestedScrollView.OnScrollChangeListener() {
                 @Override

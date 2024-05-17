@@ -140,4 +140,9 @@ public class PokemonDao extends Thread {
          this.punterIncial = 1;
          this.punterFinal = 16;
     }
+
+    public boolean haFetCrida() {
+        if (punterIncial == 1) return true;
+        return false;
+    }
 }
