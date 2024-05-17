@@ -314,7 +314,7 @@
     <LinearLayout
         android:layout_width="165dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="165dp"
+        android:layout_marginLeft="145dp"
         android:layout_marginTop="590dp">
         <ImageView
             android:layout_width="60dp"
@@ -329,7 +329,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="18sp"
-            android:textColor="@color/red"
+            android:textColor="@color/lightgray"
+            android:background="@drawable/recmoney"
             android:textStyle="bold|italic"
             android:text="@string/prova_monedes"></TextView>
     </LinearLayout>
