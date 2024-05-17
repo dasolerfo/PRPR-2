@@ -19,7 +19,7 @@ public abstract class MainActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();
 
-    FirstFragment firstFragment = new FirstFragment();
+    PokedexFragment firstFragment = new PokedexFragment();
     SecondFragment secondFragment = new SecondFragment();
     ShopFragment thirdFragment = new ShopFragment();
 
