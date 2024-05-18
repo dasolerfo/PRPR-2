@@ -43,7 +43,7 @@ public abstract class MainActivity extends AppCompatActivity implements TrainerU
             sharedPrefManager.saveTrainer(trainer);
         }
 
-        //firstFragment = PokedexFragment.newInstance(trainer);
+        firstFragment = PokedexFragment.newInstance(0, trainer);
         //secondFragment = SecondFragment.newInstance(trainer);
         thirdFragment = ShopFragment.newInstance(trainer);
         loadFragment(firstFragment);
@@ -81,7 +81,7 @@ public abstract class MainActivity extends AppCompatActivity implements TrainerU
         this.trainer = trainer;
         sharedPrefManager.saveTrainer(trainer);
 
-        //firstFragment = PokedexFragment.newInstance(trainer);
+        firstFragment = PokedexFragment.newInstance(0, trainer);
         //secondFragment = SecondFragment.newInstance(trainer);
         thirdFragment = ShopFragment.newInstance(trainer);
     }

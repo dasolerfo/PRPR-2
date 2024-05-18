@@ -16,6 +16,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.pokedexls.Entity.Trainer;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link TrainerName#newInstance} factory method to
