@@ -18,7 +18,7 @@ public class Trainer implements Serializable{
         this.numSuperballs = 10;
         this.numUltraballs = 5;
         this.numMasterballs = 2;
-        this.money = 2000;
+        this.money = 5000;
         this.pokemons = new ArrayList<>();
     }
 
