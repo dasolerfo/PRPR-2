@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.pokedexls.Entity.Pokemon;
+import com.example.pokedexls.Entity.Trainer;
 import com.example.pokedexls.Persistence.PokemonDao;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -38,7 +39,9 @@ public class PokedexFragment extends Fragment {
     private NestedScrollView nestedScrollView;
     private ImageView searchButton;
     private TextInputEditText textInputEditText;
+    private static final String ARG_TRAINER = "trainer";
     private PokemonDao pokemonDao = new PokemonDao(this);
+    private Trainer trainer;
     private String searchQuery;
     //private ArrayList<Pokemon> pokemons= new ArrayList<>();
 
@@ -51,10 +54,11 @@ public class PokedexFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static PokedexFragment newInstance(int columnCount) {
+    public static PokedexFragment newInstance(int columnCount, Trainer trainer) {
         PokedexFragment fragment = new PokedexFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putSerializable(ARG_TRAINER, trainer);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,7 +66,7 @@ public class PokedexFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        trainer = (Trainer) getArguments().getSerializable(ARG_TRAINER);
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -110,7 +114,7 @@ public class PokedexFragment extends Fragment {
             }
 
             if (pokemonDao.haFetCrida()) {
-                adapter = new MyPokemonRecyclerViewAdapter();
+                adapter = new MyPokemonRecyclerViewAdapter(trainer);
                 recyclerView.setAdapter(adapter);
                 demanarNousPokemons();
             } else {

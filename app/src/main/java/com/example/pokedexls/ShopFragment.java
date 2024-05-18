@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.pokedexls.Entity.Trainer;
+import com.example.pokedexls.Entity.TrainerUpdate;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -39,6 +42,10 @@ public class ShopFragment extends Fragment {
     private int totalMaster;
     private int totalPreu;
 
+    private static final String ARG_TRAINER = "trainer";
+    private Trainer trainer;
+    private TrainerUpdate trainerUpdate;
+
     public ShopFragment() {
         totalPokes = 0;
         totalSuper = 0;
@@ -47,9 +54,19 @@ public class ShopFragment extends Fragment {
         totalPreu = 0;
     }
 
+    public static ShopFragment newInstance(Trainer trainer) {
+        ShopFragment fragment = new ShopFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_TRAINER, trainer);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        trainer = (Trainer) getArguments().getSerializable(ARG_TRAINER);
+        trainerUpdate = (TrainerUpdate) getContext();
     }
 
     @Override
@@ -72,6 +89,10 @@ public class ShopFragment extends Fragment {
         cartera = (TextView) view.findViewById(R.id.cartera);
         buy = (ImageButton) view.findViewById(R.id.buy);
         totalCost = (TextView) view.findViewById(R.id.quantitatVenta);
+
+        NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+        String formattedTotalPreu = format.format(trainer.getMoney());
+        cartera.setText(formattedTotalPreu+"€");
 
         boto_mesP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,6 +177,9 @@ public class ShopFragment extends Fragment {
                 String[] aux = text.split("u");
                 try {
                     int num = Integer.parseInt(aux[0]);
+                    if (num < 0){
+                        num = 0;
+                    }
                     textP.setText(num+"u");
                     totalPokes = num;
                 } catch (NumberFormatException e){
@@ -174,6 +198,9 @@ public class ShopFragment extends Fragment {
                 String[] aux = text.split("u");
                 try {
                     int num = Integer.parseInt(aux[0]);
+                    if (num < 0){
+                        num = 0;
+                    }
                     textS.setText(num+"u");
                     totalSuper = num;
                 } catch (NumberFormatException e){
@@ -192,6 +219,9 @@ public class ShopFragment extends Fragment {
                 String[] aux = text.split("u");
                 try {
                     int num = Integer.parseInt(aux[0]);
+                    if (num < 0){
+                        num = 0;
+                    }
                     textU.setText(num+"u");
                     totalUltra = num;
                 } catch (NumberFormatException e){
@@ -210,6 +240,9 @@ public class ShopFragment extends Fragment {
                 String[] aux = text.split("u");
                 try {
                     int num = Integer.parseInt(aux[0]);
+                    if (num < 0){
+                        num = 0;
+                    }
                     textM.setText(num+"u");
                     totalMaster = num;
                 } catch (NumberFormatException e){
@@ -225,12 +258,21 @@ public class ShopFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (totalPreu != 0) {
-                    if (500 >= totalPreu) {
+                    if (trainer.getMoney() >= totalPreu) {
                         View layout = inflater.inflate(R.layout.toast_correcte, null);
                         Toast toast = new Toast(getActivity());
                         toast.setDuration(Toast.LENGTH_SHORT);
                         toast.setView(layout);
                         toast.show();
+
+                        trainer.setMoney(trainer.getMoney()-totalPreu);
+                        trainer.setNumPokeballs(trainer.getNumPokeballs()+totalPokes);
+                        trainer.setNumSuperballs(trainer.getNumSuperballs()+totalSuper);
+                        trainer.setNumUltraballs(trainer.getNumUltraballs()+totalUltra);
+                        trainer.setNumMasterballs(trainer.getNumMasterballs()+totalMaster);
+                        trainerUpdate.actualitzaTrainer(trainer);
+
+                        finalitzaCompra();
                     } else {
                         View layout = inflater.inflate(R.layout.toast_incorrecte, null);
                         Toast toast = new Toast(getActivity());
@@ -250,5 +292,23 @@ public class ShopFragment extends Fragment {
         NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
         String formattedTotalPreu = format.format(totalPreu);
         totalCost.setText(formattedTotalPreu+"€");
+    }
+
+    private void finalitzaCompra(){
+        NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+        String formattedTotalPreu = format.format(trainer.getMoney());
+        cartera.setText(formattedTotalPreu+"€");
+
+        totalPokes = 0;
+        totalSuper = 0;
+        totalUltra = 0;
+        totalMaster = 0;
+        totalPreu = 0;
+
+        textP.setText(totalPokes+"u");
+        textS.setText(totalSuper+"u");
+        textU.setText(totalUltra+"u");
+        textM.setText(totalMaster+"u");
+        actPreuTotal();
     }
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.pokedexls.Entity.Pokemon;
 import com.example.pokedexls.Entity.PokemonColor;
+import com.example.pokedexls.Entity.Trainer;
 import com.example.pokedexls.Entity.TypeP;
 import com.example.pokedexls.placeholder.PlaceholderContent.PlaceholderItem;
 import com.example.pokedexls.databinding.FragmentPokedexBinding;
@@ -29,9 +30,10 @@ import java.util.List;
 public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemonRecyclerViewAdapter.ViewHolder> {
 
     private final List<Pokemon> mValues = new ArrayList<>();
+    private Trainer trainer;
 
-    public MyPokemonRecyclerViewAdapter() {
-
+    public MyPokemonRecyclerViewAdapter(Trainer trainer) {
+        this.trainer = trainer;
     }
 
     @Override
@@ -56,12 +58,12 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
                 PokemonDetail secondFragment = new PokemonDetail();
 
 
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("param1", mValues.get(position));
+                /*Bundle bundle = new Bundle();
+                bundle.putSerializable("param1", mValues.get(position));*/
 
-                PokemonDetail fragment = new PokemonDetail();
-                fragment.setArguments(bundle);
-
+                PokemonDetail fragment;
+                fragment = PokemonDetail.newInstance(mValues.get(position), trainer);
+                int a = trainer.getNumPokeballs();
                 ((AppCompatActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_container, fragment)
                         .addToBackStack(null)

@@ -17,13 +17,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pokedexls.Entity.Ability;
 import com.example.pokedexls.Entity.Pokemon;
 import com.example.pokedexls.Entity.PokemonColor;
+import com.example.pokedexls.Entity.Trainer;
+import com.example.pokedexls.Entity.TrainerUpdate;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.squareup.picasso.Picasso;
 
@@ -44,6 +48,9 @@ public class PokemonDetail extends Fragment {
     // TODO: Rename and change types of parameters
     private Pokemon pokemon;
     private String mParam2;
+    private TrainerUpdate trainerUpdate;
+    private static final String ARG_TRAINER = "trainer";
+    private Trainer trainer;
 
     public PokemonDetail() {
         // Required empty public constructor
@@ -58,11 +65,11 @@ public class PokemonDetail extends Fragment {
      * @return A new instance of fragment PokemonDetail.
      */
     // TODO: Rename and change types and number of parameters
-    public static PokemonDetail newInstance(Pokemon param1, String param2) {
+    public static PokemonDetail newInstance(Pokemon param1, Trainer trainer) {
         PokemonDetail fragment = new PokemonDetail();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_TRAINER, trainer);
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,11 +77,12 @@ public class PokemonDetail extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        trainer = (Trainer) getArguments().getSerializable(ARG_TRAINER);
+        trainerUpdate = (TrainerUpdate) getContext();
         if (getArguments() != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 pokemon = (Pokemon)getArguments().getSerializable(ARG_PARAM1, Pokemon.class);
             }
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -211,6 +219,34 @@ public class PokemonDetail extends Fragment {
             public void onClick(View v) {
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
                 View view = LayoutInflater.from(PokemonDetail.this.getContext()).inflate(R.layout.bottom_sheet_details, null);
+                ImageButton pokeball = (ImageButton) view.findViewById(R.id.capPokeball);
+                TextView tpokeball = (TextView) view.findViewById(R.id.pokeballNumber);
+                ImageButton superball = (ImageButton) view.findViewById(R.id.capSuperball);
+                TextView tsuperball = (TextView) view.findViewById(R.id.superballNumber);
+                ImageButton ultraball = (ImageButton) view.findViewById(R.id.capUltraball);
+                TextView tultraball = (TextView) view.findViewById(R.id.ultraballNumber);
+                ImageButton masterball = (ImageButton) view.findViewById(R.id.capMasterball);
+                TextView tmasterball = (TextView) view.findViewById(R.id.masterballNumber);
+
+                tpokeball.setText(trainer.getNumPokeballs()+"");
+                tsuperball.setText(trainer.getNumSuperballs()+"");
+                tultraball.setText(trainer.getNumUltraballs()+"");
+                tmasterball.setText(trainer.getNumMasterballs()+"");
+
+                pokeball.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (trainer.getPokemons().size() < 6) {
+                            if (trainer.getNumPokeballs() > 0) {
+
+                            } else {
+
+                            }
+                        } else{
+                            
+                        }
+                    }
+                });
                 bottomSheetDialog.setContentView(view);
                 bottomSheetDialog.show();
 
