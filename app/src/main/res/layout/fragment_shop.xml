@@ -298,7 +298,6 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:scaleType="centerInside"
-            android:layout_marginLeft="5dp"
             android:src="@drawable/pokecoin"></ImageView>
         <TextView
             android:id="@+id/cartera"
@@ -329,7 +328,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="18sp"
-            android:textColor="@color/lightgray"
+            android:textColor="@color/red"
             android:background="@drawable/recmoney"
             android:textStyle="bold|italic"
             android:text="@string/prova_monedes"></TextView>

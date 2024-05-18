@@ -11,17 +11,23 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
+import com.example.pokedexls.Entity.Trainer;
+import com.example.pokedexls.Entity.TrainerUpdate;
+import com.example.pokedexls.Persistence.SharedPrefManager;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public abstract class MainActivity extends AppCompatActivity {
+public abstract class MainActivity extends AppCompatActivity implements TrainerUpdate {
 
     protected abstract Fragment createFragment();
 
     PokedexFragment firstFragment = new PokedexFragment();
     SecondFragment secondFragment = new SecondFragment();
     ShopFragment thirdFragment = new ShopFragment();
+    private Trainer trainer;
+    private SharedPrefManager sharedPrefManager;
+
 
 
     @Override
@@ -30,6 +36,17 @@ public abstract class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView navigation = findViewById(R.id.bottomNavigation);
+        sharedPrefManager = new SharedPrefManager(this);
+        trainer = sharedPrefManager.getTrainer();
+        if (trainer == null){
+            trainer = new Trainer();
+            sharedPrefManager.saveTrainer(trainer);
+        }
+
+        //firstFragment = PokedexFragment.newInstance(trainer);
+        //secondFragment = SecondFragment.newInstance(trainer);
+        thirdFragment = ShopFragment.newInstance(trainer);
+        loadFragment(firstFragment);
 
         navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -58,15 +75,15 @@ public abstract class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.commit();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragment = fragmentManager.findFragmentById(R.id.frame_container);
-
-        if (fragment == null){
-            fragment = createFragment();
-            fragmentManager.beginTransaction().add(R.id.frame_container, fragment).commit();
-        }
-
     }
 
+    public void actualitzaTrainer(Trainer trainer){
+        this.trainer = trainer;
+        sharedPrefManager.saveTrainer(trainer);
+
+        //firstFragment = PokedexFragment.newInstance(trainer);
+        //secondFragment = SecondFragment.newInstance(trainer);
+        thirdFragment = ShopFragment.newInstance(trainer);
+    }
 
 }
