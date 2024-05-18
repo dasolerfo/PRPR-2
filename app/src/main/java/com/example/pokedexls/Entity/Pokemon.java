@@ -7,6 +7,11 @@ public class Pokemon implements Serializable {
     private Sprites sprites;
     private PokemonType[] types;
     private String description;
+
+    public Ability[] getAbilities() {
+        return abilities;
+    }
+
     private Stats[] stats;
     private Ability[] abilities;
 
@@ -21,5 +26,9 @@ public class Pokemon implements Serializable {
 
     public PokemonType[] getTypes() {
         return types;
+    }
+
+    public Stats[] getStats() {
+        return stats;
     }
 }

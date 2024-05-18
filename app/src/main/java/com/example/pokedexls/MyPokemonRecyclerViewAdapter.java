@@ -1,7 +1,12 @@
 package com.example.pokedexls;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.app.FragmentTransaction;
+import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,14 +48,35 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
         holder.itemView.setBackgroundColor(PokemonColor.valueOf(type.getName()).getColor());
         Picasso.get().load(mValues.get(position).getSprites().getFront_default()).into(holder.pokeFoto);
         holder.pokeNom.setText(mValues.get(position).getName().toUpperCase());
-        //holder.mIdView.setText(mValues.get(position).id);
-        //holder.mContentView.setText(mValues.get(position).content);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PokemonDetail secondFragment = new PokemonDetail();
+
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("param1", mValues.get(position));
+
+                PokemonDetail fragment = new PokemonDetail();
+                fragment.setArguments(bundle);
+
+                ((AppCompatActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_container, fragment)
+                        .addToBackStack(null)
+                        .commit();
+
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return mValues.size();
     }
+
 
     public int addPokemon(Pokemon pokemon) {
         mValues.add(pokemon);
@@ -83,4 +109,6 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
     public void addPokemons(Pokemon[] llista){
         mValues.addAll(Arrays.asList(llista));
     }
+
+
 }
