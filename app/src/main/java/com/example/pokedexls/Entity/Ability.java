@@ -4,14 +4,15 @@ import java.io.Serializable;
 
 public class Ability implements Serializable {
      private boolean is_hidden;
-     private String name;
-     private String url;
+     private AbilityP ability;
+
 
      public boolean isIs_hidden() {
           return is_hidden;
      }
 
      public String getName() {
-          return name;
+          return ability.getName().toUpperCase().charAt(0) +
+                  ability.getName().substring(1, ability.getName().length()).toLowerCase();
      }
 }
