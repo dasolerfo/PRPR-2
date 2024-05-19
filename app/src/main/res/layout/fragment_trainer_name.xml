@@ -6,41 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".TrainerName">
 
-    <TextView
-        android:id="@+id/trainerNameTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
-        android:gravity="center_horizontal"
-        android:text="@string/trainer_edit_name"
-        android:textColor="@color/red"
-        android:textSize="30sp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="130dp" />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="438dp"
+        android:layout_height="747dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="-10dp"
+        android:alpha="0.7"
+        android:src="@drawable/fondo_nom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/editNameTrainer"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="324dp"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="@string/trainer_hint"
         android:inputType="text"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/trainerNameTextView" />
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="211dp"
-        android:layout_height="293dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="64dp"
+    <ImageButton
+        android:id="@+id/bSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="400dp"
+        android:src="@android:drawable/ic_menu_send"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNameTrainer"
-        app:srcCompat="@drawable/charmander" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tTextProva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="528dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
