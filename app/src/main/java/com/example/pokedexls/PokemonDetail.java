@@ -61,7 +61,7 @@ public class PokemonDetail extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+
      * @return A new instance of fragment PokemonDetail.
      */
     // TODO: Rename and change types and number of parameters
@@ -105,6 +105,7 @@ public class PokemonDetail extends Fragment {
                     TextView textView = new TextView(getContext());
                     textView.setText(ability.getName());
                     textView.setTypeface(getResources().getFont(R.font.encodesanscondensedbold));
+                    textView.setTextSize(18);
                     abilities.addView(textView);
                     tr = false;
                 } else{
@@ -112,6 +113,7 @@ public class PokemonDetail extends Fragment {
                         TextView textView = new TextView(getContext());
                         textView.setText(ability.getName());
                         textView.setTypeface(getResources().getFont(R.font.encodesanscondensedbold));
+                        textView.setTextSize(18);
                         abilities.addView(textView);
                     }
                 }
@@ -120,6 +122,7 @@ public class PokemonDetail extends Fragment {
                     TextView textView = new TextView(getContext());
                     textView.setText(ability.getName());
                     textView.setTypeface(getResources().getFont(R.font.encodesanscondensedbold), Typeface.BOLD);
+                    textView.setTextSize(18);
                     abilities.addView(textView);
                 }
             }
@@ -159,10 +162,11 @@ public class PokemonDetail extends Fragment {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT));
         textView.setGravity(Gravity.CENTER);
-        textView.setPadding(8, 8, 8, 8); // padding en pixels, potser necessites convertir dp a pixels
+        textView.setPadding(16, 16, 16, 16); // padding en pixels, potser necessites convertir dp a pixels
         textView.setText(pokemon.getTypes()[0].getTypeP().getName());
         textView.setTypeface(getResources().getFont(R.font.encodesanscondensedbold)); // Necessitaràs afegir la font a res/font
-        textView.setTextSize(16);
+        textView.setTextSize(20);
+        textView.setTextColor(Color.WHITE);
         type2.addView(textView);
         typeList.addView(type2);
 
@@ -181,11 +185,11 @@ public class PokemonDetail extends Fragment {
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT));
             textView1.setGravity(Gravity.CENTER);
-            textView1.setPadding(8, 8, 8, 8); // padding en pixels, potser necessites convertir dp a pixels
+            textView1.setPadding(16, 16, 16, 16); // padding en pixels, potser necessites convertir dp a pixels
             textView1.setText(pokemon.getTypes()[1].getTypeP().getName());
             textView1.setTypeface(getResources().getFont(R.font.encodesanscondensedbold), Typeface.BOLD); // Necessitaràs afegir la font a res/font
             textView1.setTextColor(Color.WHITE); // Si necessites un color específic, canvia'l aquí
-            textView1.setTextSize(16);
+            textView1.setTextSize(20);
             type1.addView(textView1);
             typeList.addView(type1);
 
@@ -200,6 +204,9 @@ public class PokemonDetail extends Fragment {
         // Inflate the layout for this fragment
         TextView nom = this.getView().findViewById(R.id.nomPokemon);
         nom.setText(pokemon.getName().toUpperCase());
+
+        LinearLayout fons = this.getView().findViewById(R.id.fonsDetalls);
+        fons.setBackgroundColor(PokemonColor.valueOf(pokemon.getTypes()[0].getTypeP().getName()).getColor());
 
         //TODO: CAL FER UNA ALTRE CRIDA A LA API A SPECIES
         //setDescription();
