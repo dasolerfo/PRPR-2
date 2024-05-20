@@ -78,6 +78,7 @@ public class PokemonDao extends Thread implements Serializable {
 
 
 
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -168,12 +169,13 @@ public class PokemonDao extends Thread implements Serializable {
                                 evolutionsRemaining++;
                                 }
                                 evolutionDetails = evolutionDetails.getJSONArray("evolves_to").getJSONObject(0);
-
+                                pokemonDetail.sendEvolutionsRemaining(evolutionDetails.getBoolean("is_legendary") ? 4 : 4 - evolutionsRemaining);
                             }
                         }catch (JSONException e) {
                             e.printStackTrace();
                         } finally {
-                            pokemonDetail.sendEvolutionsRemaining(evolutionsRemaining);
+
+
                             //TODO : ENVIA A LA VISTA
                         }
 
