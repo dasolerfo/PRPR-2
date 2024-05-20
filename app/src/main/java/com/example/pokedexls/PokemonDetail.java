@@ -51,6 +51,7 @@ public class PokemonDetail extends Fragment {
     private TrainerUpdate trainerUpdate;
     private static final String ARG_TRAINER = "trainer";
     private Trainer trainer;
+    private LayoutInflater inflater;
 
     public PokemonDetail() {
         // Required empty public constructor
@@ -89,7 +90,7 @@ public class PokemonDetail extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        this.inflater = inflater;
         return inflater.inflate(R.layout.fragment_pokemon_detail, container, false);
     }
 
@@ -234,31 +235,278 @@ public class PokemonDetail extends Fragment {
                 TextView tultraball = (TextView) view.findViewById(R.id.ultraballNumber);
                 ImageButton masterball = (ImageButton) view.findViewById(R.id.capMasterball);
                 TextView tmasterball = (TextView) view.findViewById(R.id.masterballNumber);
+                Button cancelar = (Button) view.findViewById(R.id.cancelarCaptura);
+                //LayoutInflater inflater = LayoutInflater.from(getContext());
 
                 tpokeball.setText(trainer.getNumPokeballs()+"");
                 tsuperball.setText(trainer.getNumSuperballs()+"");
                 tultraball.setText(trainer.getNumUltraballs()+"");
                 tmasterball.setText(trainer.getNumMasterballs()+"");
 
+                bottomSheetDialog.setContentView(view);
+                if (comprovaPokemon()){
+                    bottomSheetDialog.show();
+                } else {
+                    View layout = inflater.inflate(R.layout.toast_jacapturat, null);
+                    Toast toast = new Toast(getContext());
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(layout);
+                    toast.show();
+                }
+
+                cancelar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomSheetDialog.dismiss();
+                    }
+                });
+
+
                 pokeball.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (trainer.getPokemons().size() < 6) {
                             if (trainer.getNumPokeballs() > 0) {
+                                int type = getStaticsPokemon();
+                                if (capturaPokemon(type, 1)){
+                                    View layout = inflater.inflate(R.layout.toast_capturat, null);
+                                    Toast toast = new Toast(getActivity());
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.setView(layout);
+                                    toast.show();
+
+                                    trainer.setMoney(trainer.getMoney() + 400 + (100*type));
+                                    pokemon.setCaptured(true);
+                                    pokemon.setBallCaptured(1);
+                                    trainer.getPokemons().add(pokemon);
+                                    bottomSheetDialog.dismiss();
+
+                                } else {
+                                    View layout = inflater.inflate(R.layout.toast_pokemon_nocapturat, null);
+                                    Toast toast = new Toast(getActivity());
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.setView(layout);
+                                    toast.show();
+                                }
+                                trainer.setNumPokeballs(trainer.getNumPokeballs()-1);
+                                trainerUpdate.actualitzaTrainer(trainer);
+                                tpokeball.setText(trainer.getNumPokeballs()+"");
 
                             } else {
-
+                                View layout = inflater.inflate(R.layout.toast_nopokeballs, null);
+                                Toast toast = new Toast(getActivity());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
                             }
                         } else{
-                            
+                            View layout = inflater.inflate(R.layout.toast_sixpokes, null);
+                            Toast toast = new Toast(getActivity());
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.setView(layout);
+                            toast.show();
                         }
                     }
                 });
-                bottomSheetDialog.setContentView(view);
-                bottomSheetDialog.show();
 
+                superball.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (trainer.getPokemons().size() < 6) {
+                            if (trainer.getNumSuperballs() > 0) {
+                                int type = getStaticsPokemon();
+                                if (capturaPokemon(type, 2)){
+                                    View layout = inflater.inflate(R.layout.toast_capturat, null);
+                                    Toast toast = new Toast(getActivity());
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.setView(layout);
+                                    toast.show();
 
+                                    trainer.setMoney(trainer.getMoney() + 400 + (100*type));
+                                    pokemon.setCaptured(true);
+                                    pokemon.setBallCaptured(2);
+                                    trainer.getPokemons().add(pokemon);
+                                    bottomSheetDialog.dismiss();
+
+                                } else {
+                                    View layout = inflater.inflate(R.layout.toast_pokemon_nocapturat, null);
+                                    Toast toast = new Toast(getActivity());
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.setView(layout);
+                                    toast.show();
+                                }
+                                trainer.setNumSuperballs(trainer.getNumSuperballs()-1);
+                                trainerUpdate.actualitzaTrainer(trainer);
+                                tsuperball.setText(trainer.getNumSuperballs()+"");
+
+                            } else {
+                                View layout = inflater.inflate(R.layout.toast_nopokeballs, null);
+                                Toast toast = new Toast(getActivity());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
+                            }
+                        } else{
+                            View layout = inflater.inflate(R.layout.toast_sixpokes, null);
+                            Toast toast = new Toast(getActivity());
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.setView(layout);
+                            toast.show();
+                        }
+                    }
+                });
+
+                ultraball.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (trainer.getPokemons().size() < 6) {
+                            if (trainer.getNumUltraballs() > 0) {
+                                int type = getStaticsPokemon();
+                                if (capturaPokemon(type, 3)){
+                                    View layout = inflater.inflate(R.layout.toast_capturat, null);
+                                    Toast toast = new Toast(getActivity());
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.setView(layout);
+                                    toast.show();
+
+                                    trainer.setMoney(trainer.getMoney() + 400 + (100*type));
+                                    pokemon.setCaptured(true);
+                                    pokemon.setBallCaptured(3);
+                                    trainer.getPokemons().add(pokemon);
+                                    bottomSheetDialog.dismiss();
+
+                                } else {
+                                    View layout = inflater.inflate(R.layout.toast_pokemon_nocapturat, null);
+                                    Toast toast = new Toast(getActivity());
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.setView(layout);
+                                    toast.show();
+                                }
+                                trainer.setNumUltraballs(trainer.getNumUltraballs()-1);
+                                trainerUpdate.actualitzaTrainer(trainer);
+                                tultraball.setText(trainer.getNumUltraballs()+"");
+
+                            } else {
+                                View layout = inflater.inflate(R.layout.toast_nopokeballs, null);
+                                Toast toast = new Toast(getActivity());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
+                            }
+                        } else{
+                            View layout = inflater.inflate(R.layout.toast_sixpokes, null);
+                            Toast toast = new Toast(getActivity());
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.setView(layout);
+                            toast.show();
+                        }
+                    }
+                });
+
+                masterball.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (trainer.getPokemons().size() < 6) {
+                            if (trainer.getNumMasterballs() > 0) {
+                                int type = getStaticsPokemon();
+                                if (capturaPokemon(type, 4)){
+                                    View layout = inflater.inflate(R.layout.toast_capturat, null);
+                                    Toast toast = new Toast(getActivity());
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.setView(layout);
+                                    toast.show();
+
+                                    trainer.setMoney(trainer.getMoney() + 400 + (100*type));
+                                    pokemon.setCaptured(true);
+                                    pokemon.setBallCaptured(4);
+                                    trainer.getPokemons().add(pokemon);
+                                    bottomSheetDialog.dismiss();
+                                } else {
+                                    View layout = inflater.inflate(R.layout.toast_pokemon_nocapturat, null);
+                                    Toast toast = new Toast(getActivity());
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.setView(layout);
+                                    toast.show();
+                                }
+                                trainer.setNumMasterballs(trainer.getNumMasterballs()-1);
+                                trainerUpdate.actualitzaTrainer(trainer);
+                                tmasterball.setText(trainer.getNumMasterballs()+"");
+
+                            } else {
+                                View layout = inflater.inflate(R.layout.toast_nopokeballs, null);
+                                Toast toast = new Toast(getActivity());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
+                            }
+                        } else{
+                            View layout = inflater.inflate(R.layout.toast_sixpokes, null);
+                            Toast toast = new Toast(getActivity());
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.setView(layout);
+                            toast.show();
+                        }
+                    }
+                });
             }
         });
+    }
+
+    private int getStaticsPokemon(){
+        Random random = new Random();
+        int max = 0;
+        int min = 0;
+        switch (pokemon.getEvolution()){
+            case 1:
+                min = 20;
+                max = 80;
+                break;
+            case 2:
+                min = 80;
+                max = 200;
+                break;
+            case 3:
+                min = 200;
+                max = 350;
+                break;
+            case 4:
+                min = 350;
+                max = 500;
+                break;
+        }
+        int randNum = random.nextInt((max - min) + 1) + min;
+        return randNum;
+    }
+
+    public boolean capturaPokemon(int type, int pokeball){
+        double layer = 0;
+        switch (pokeball){
+            case 1:
+                layer = (600-type) / 600.0;
+                break;
+            case 2:
+                layer = ((600-type)/ (600.0 ))* 1.5;
+                break;
+            case 3:
+                layer = ((600-type)/ (600.0 ))* 2;
+                break;
+            case 4:
+                layer = 1;
+                break;
+        }
+        if (Math.random() <= layer){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean comprovaPokemon(){
+        for (int i = 0; i < trainer.getPokemons().size(); i++) {
+            if (trainer.getPokemons().get(i).getName().equals(pokemon.getName())){
+                return false;
+            }
+        }
+        return  true;
     }
 }

@@ -33,5 +33,7 @@
     <string name="super_ball">Super Ball</string>
     <string name="ultra_ball">Ultra Ball</string>
     <string name="master_ball">Master Ball</string>
+    <string name="ja_tens_aquest_pokemon">Ja tens aquest pokemon!</string>
+    <string name="cancelar">Cancelar</string>
 
 </resources>
