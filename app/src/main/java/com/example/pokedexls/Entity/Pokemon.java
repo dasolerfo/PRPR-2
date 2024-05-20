@@ -63,6 +63,8 @@ public class Pokemon implements Serializable {
     private int ballCaptured;
 
 
+
+
     public Ability[] getAbilities() {
         return abilities;
     }

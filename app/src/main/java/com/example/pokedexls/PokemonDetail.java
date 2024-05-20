@@ -468,7 +468,7 @@ public class PokemonDetail extends Fragment {
 
 
     public void sendEvolutionsRemaining(int evolutionsRemaining) {
-        pokemon.setForms(evolutionsRemaining);
+        pokemon.setEvolution(evolutionsRemaining);
     }
     public void setDescription(String description) {
         pokemon.setDescription(description);
