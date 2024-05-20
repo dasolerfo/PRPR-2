@@ -1,10 +1,11 @@
 package com.example.pokedexls;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.FragmentTransaction;
-import android.os.Bundle;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,28 +52,40 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
         holder.itemView.setBackgroundColor(PokemonColor.valueOf(type.getName()).getColor());
         Picasso.get().load(mValues.get(position).getSprites().getFront_default()).into(holder.pokeFoto);
         holder.pokeNom.setText(mValues.get(position).getName().toUpperCase());
+        holder.pokeball.setImageDrawable(getPokeball(mValues.get(position), holder.itemView.getContext()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 PokemonDetail secondFragment = new PokemonDetail();
-
-
-                /*Bundle bundle = new Bundle();
-                bundle.putSerializable("param1", mValues.get(position));*/
-
                 PokemonDetail fragment;
                 fragment = PokemonDetail.newInstance(mValues.get(position), trainer);
-                int a = trainer.getNumPokeballs();
                 ((AppCompatActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_container, fragment)
                         .addToBackStack(null)
                         .commit();
-
-
             }
         });
+    }
+
+    private Drawable getPokeball(Pokemon pokemon, Context context) {
+        Drawable drawable;
+        for (int i = 0; i < trainer.getPokemons().size(); i++) {
+            if (trainer.getPokemons().get(i).getName().equals(pokemon.getName())){
+                switch (trainer.getPokemons().get(i).getBallCaptured()){
+                    case 1:
+                        return context.getDrawable(R.drawable.user_pokeball);
+                    case 2:
+                        return context.getDrawable(R.drawable.user_superball);
+                    case 3:
+                        return context.getDrawable(R.drawable.user_ultraball);
+                    case 4:
+                        return context.getDrawable(R.drawable.user_megaball);
+                }
+            }
+        }
+        return null;
     }
 
     @Override
@@ -94,6 +107,7 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final ImageView pokeFoto;
         public final TextView pokeNom;
+        public final ImageView pokeball;
         public Pokemon mItem;
 
 
@@ -101,6 +115,7 @@ public class MyPokemonRecyclerViewAdapter extends RecyclerView.Adapter<MyPokemon
             super(binding.getRoot());
             pokeFoto = binding.pokemonFoto;
             pokeNom = binding.content;
+            pokeball = binding.pokeballCapturat;
         }
 
         @Override
