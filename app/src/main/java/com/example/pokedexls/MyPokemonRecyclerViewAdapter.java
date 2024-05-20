@@ -16,6 +16,7 @@ import com.example.pokedexls.Entity.Pokemon;
 import com.example.pokedexls.Entity.PokemonColor;
 import com.example.pokedexls.Entity.Trainer;
 import com.example.pokedexls.Entity.TypeP;
+import com.example.pokedexls.Persistence.PokemonDao;
 import com.example.pokedexls.placeholder.PlaceholderContent.PlaceholderItem;
 import com.example.pokedexls.databinding.FragmentPokedexBinding;
 import com.squareup.picasso.Picasso;

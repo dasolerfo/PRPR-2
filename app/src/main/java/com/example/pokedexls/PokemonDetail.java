@@ -28,6 +28,7 @@ import com.example.pokedexls.Entity.Pokemon;
 import com.example.pokedexls.Entity.PokemonColor;
 import com.example.pokedexls.Entity.Trainer;
 import com.example.pokedexls.Entity.TrainerUpdate;
+import com.example.pokedexls.Persistence.PokemonDao;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.squareup.picasso.Picasso;
 
@@ -44,6 +45,7 @@ public class PokemonDetail extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "dao";
 
     // TODO: Rename and change types of parameters
     private Pokemon pokemon;
@@ -53,6 +55,7 @@ public class PokemonDetail extends Fragment {
     private Trainer trainer;
     private LayoutInflater inflater;
 
+    private PokemonDao pokemonDao;
     public PokemonDetail() {
         // Required empty public constructor
     }
@@ -71,6 +74,7 @@ public class PokemonDetail extends Fragment {
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, param1);
         args.putSerializable(ARG_TRAINER, trainer);
+        args.putSerializable(ARG_PARAM3, new PokemonDao());
         fragment.setArguments(args);
         return fragment;
     }
@@ -78,11 +82,14 @@ public class PokemonDetail extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         trainer = (Trainer) getArguments().getSerializable(ARG_TRAINER);
         trainerUpdate = (TrainerUpdate) getContext();
         if (getArguments() != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                pokemon = (Pokemon)getArguments().getSerializable(ARG_PARAM1, Pokemon.class);
+                pokemon = getArguments().getSerializable(ARG_PARAM1, Pokemon.class);
+                 pokemonDao = getArguments().getSerializable(ARG_PARAM3, PokemonDao.class);
+                pokemonDao.completePokemon(this, pokemon);
             }
         }
     }
@@ -90,7 +97,9 @@ public class PokemonDetail extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         this.inflater = inflater;
+
         return inflater.inflate(R.layout.fragment_pokemon_detail, container, false);
     }
 
@@ -98,37 +107,40 @@ public class PokemonDetail extends Fragment {
 
         LinearLayout abilities = getView().findViewById(R.id.llistaHabilitats);
 
+
+
         boolean tr = true;
         Random r = new Random();
         for (Ability ability : pokemon.getAbilities()){
+            if (!tr) break;
             if (!ability.isIs_hidden()){
-                if (tr){
-                    TextView textView = new TextView(getContext());
-                    textView.setText(ability.getName());
-                    textView.setTypeface(getResources().getFont(R.font.encodesanscondensedbold));
-                    textView.setTextSize(18);
-                    abilities.addView(textView);
-                    tr = false;
-                } else{
-                    if ((r.nextInt(1)+1) % 2 == 0){
+                if ((r.nextInt(1)+1) % 2 == 0) {
                         TextView textView = new TextView(getContext());
                         textView.setText(ability.getName());
                         textView.setTypeface(getResources().getFont(R.font.encodesanscondensedbold));
                         textView.setTextSize(18);
                         abilities.addView(textView);
-                    }
+                        tr = false;
                 }
-            } else {
-                if ((r.nextInt(3)) == 1){
+            }
+                else if ((r.nextInt(3)) == 1){
                     TextView textView = new TextView(getContext());
                     textView.setText(ability.getName());
                     textView.setTypeface(getResources().getFont(R.font.encodesanscondensedbold), Typeface.BOLD);
                     textView.setTextSize(18);
                     abilities.addView(textView);
+                    tr = false;
                 }
-            }
+        }
+        if (tr){
+            TextView textView = new TextView(getContext());
+            textView.setText(pokemon.getAbilities()[0].getName());
+            textView.setTypeface(getResources().getFont(R.font.encodesanscondensedbold));
+            textView.setTextSize(18);
+            abilities.addView(textView);
         }
     }
+
 
     private void setStats() {
         ((TextView)getView().findViewById(R.id.hp)).setText("HP: "+ pokemon.getStats()[0].getBase_stat());
@@ -201,6 +213,8 @@ public class PokemonDetail extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
 
         // Inflate the layout for this fragment
         TextView nom = this.getView().findViewById(R.id.nomPokemon);
@@ -450,6 +464,16 @@ public class PokemonDetail extends Fragment {
                 });
             }
         });
+    }
+
+
+    public void sendEvolutionsRemaining(int evolutionsRemaining) {
+        pokemon.setEvolution(evolutionsRemaining);
+    }
+    public void setDescription(String description) {
+        pokemon.setDescription(description);
+        TextView descripcio = (TextView) getView().findViewById(R.id.description);
+        descripcio.setText(description);
     }
 
     private int getStaticsPokemon(){
