@@ -20,6 +20,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.pokedexls.Entity.Trainer;
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link TrainerName#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 
 public class TrainerName extends Fragment {
 

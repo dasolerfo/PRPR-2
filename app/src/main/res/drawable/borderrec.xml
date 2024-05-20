@@ -3,7 +3,7 @@
     <solid android:color="@color/lightgray" /> <!-- Cambia el color de fondo a gris claro -->
     <stroke
         android:width="3dp"
-        android:color="@color/red"/> <!-- Color del borde -->
+        android:color="@color/black"/> <!-- Color del borde -->
     <corners android:radius="8dp" /> <!-- Radio de esquina, ajusta según desees -->
     <item android:left="-2dp" android:top="-2dp">
         <shape>

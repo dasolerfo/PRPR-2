@@ -5,6 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".ShopFragment">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bosque"
+        android:scaleType="fitCenter"
+        android:alpha="0.4"></ImageView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +51,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/pokeball"></ImageView>
+                    android:src="@drawable/pokeballo"></ImageView>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -54,6 +60,7 @@
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:text="@string/buy"
+                        android:textStyle="bold"
                         android:singleLine="true"
                         android:imeOptions="actionDone"></EditText>
                     <LinearLayout
@@ -113,6 +120,7 @@
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:text="@string/buy"
+                        android:textStyle="bold"
                         android:singleLine="true"
                         android:imeOptions="actionDone"></EditText>
                     <LinearLayout
@@ -171,6 +179,7 @@
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:text="@string/buy"
+                        android:textStyle="bold"
                         android:singleLine="true"
                         android:imeOptions="actionDone"></EditText>
                     <LinearLayout
@@ -232,6 +241,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/buy"
                     android:singleLine="true"
+                    android:textStyle="bold"
                     android:imeOptions="actionDone"></EditText>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -266,7 +276,7 @@
             android:layout_width="600dp"
             android:layout_height="400dp"
             android:layout_marginLeft="-60dp"
-            android:layout_marginTop="-40dp"
+            android:layout_marginTop="0dp"
             android:src="@drawable/grass"></ImageView>
 
         <ImageView
@@ -279,31 +289,31 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="165dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="165dp"
-        android:layout_marginTop="540dp">
+        android:layout_width="175dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="320dp">
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="90dp"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/monedes"></ImageView>
+            android:scaleType="centerInside"
+            android:src="@drawable/pokecoin"></ImageView>
         <TextView
-            android:id="@+id/quantitatVenta"
+            android:id="@+id/cartera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textColor="@color/black"
-            android:textStyle="italic"
+            android:textStyle="bold"
             android:text="@string/prova_monedes"></TextView>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="165dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="165dp"
+        android:layout_marginLeft="145dp"
         android:layout_marginTop="590dp">
         <ImageView
             android:layout_width="60dp"
@@ -313,33 +323,24 @@
             android:scaleType="fitCenter"
             android:src="@drawable/cartera"></ImageView>
         <TextView
-            android:id="@+id/cartera"
+            android:id="@+id/quantitatVenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="18sp"
-            android:textColor="@color/black"
-            android:textStyle="italic"
+            android:textColor="@color/red"
+            android:background="@drawable/recmoney"
+            android:textStyle="bold|italic"
             android:text="@string/prova_monedes"></TextView>
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/buy"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="565dp"
-        android:layout_marginLeft="335dp"
-        android:background="@drawable/baseline_shopping_cart_24"></ImageButton>
-
-    <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/pikachu"></ImageView>
+        android:layout_marginTop="585dp"
+        android:layout_marginLeft="300dp"
+        android:background="@drawable/bossadiners"></ImageButton>
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="right"
-        android:background="@drawable/pikachu"></ImageView>
 
 </FrameLayout>

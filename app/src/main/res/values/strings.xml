@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">PokeDexLS</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="rogerTeton">Roger Teton</string>
+    <string name="nopokeball">No tens suficients poke-balls d\'aquest tipus!</string>
+    <string name="nocapturat">Pokemon no capturat!</string>
+    <string name="capturat">Pokemon capturat!</string>
+    <string name="sispokes">Ja tens sis pokemons!</string>
     <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="pokedex">Pokèdex</string>
     <string name="shop">Shop</string>
@@ -8,10 +17,10 @@
     <string name="trainer_edit_name">Change the name of your trainer</string>
     <string name="trainer_hint">Write a name:</string>
 
-    <string name="text_pokeball">Price: 200€</string>
-    <string name="text_superball">Price: 500€</string>
-    <string name="text_ultraball">Price: 1.500€</string>
-    <string name="text_masterball">Price: 100.000€</string>
+    <string name="text_pokeball">Preu: 200€</string>
+    <string name="text_superball">Preu: 500€</string>
+    <string name="text_ultraball">Preu: 1.500€</string>
+    <string name="text_masterball">Preu: 100.000€</string>
     <string name="buy">0u</string>
     <string name="prova_monedes">0€</string>
     <string name="mas">+</string>
@@ -19,4 +28,12 @@
     <string name="compra_incorrecte">No tens suficients diners!</string>
     <string name="compra_correcte">Compra realitzada correctament!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="habilitats">Habilitats:</string>
+    <string name="poke_ball">Poke-ball</string>
+    <string name="super_ball">Super Ball</string>
+    <string name="ultra_ball">Ultra Ball</string>
+    <string name="master_ball">Master Ball</string>
+    <string name="ja_tens_aquest_pokemon">Ja tens aquest pokemon!</string>
+    <string name="cancelar">Cancelar</string>
+
 </resources>
