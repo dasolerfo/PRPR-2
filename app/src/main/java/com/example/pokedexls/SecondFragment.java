@@ -127,23 +127,23 @@ public class SecondFragment extends Fragment {
         pokeball6 = view.findViewById(R.id.iPokemon6Pokeball);
         pokemon6Name = view.findViewById(R.id.tPokemon6Name);
 
-        pokemon1.setVisibility(View.INVISIBLE);
+        pokemon1.setImageResource(R.drawable.interrogant);
+        pokemon2.setImageResource(R.drawable.interrogant);
+        pokemon3.setImageResource(R.drawable.interrogant);
+        pokemon4.setImageResource(R.drawable.interrogant);
+        pokemon5.setImageResource(R.drawable.interrogant);
+        pokemon6.setImageResource(R.drawable.interrogant);
+
         pokeball1.setVisibility(View.INVISIBLE);
         pokemon1Name.setVisibility(View.INVISIBLE);
-        pokemon2.setVisibility(View.INVISIBLE);
         pokeball2.setVisibility(View.INVISIBLE);
         pokemon2Name.setVisibility(View.INVISIBLE);
-        pokemon3.setVisibility(View.INVISIBLE);
         pokeball3.setVisibility(View.INVISIBLE);
         pokemon3Name.setVisibility(View.INVISIBLE);
-        pokemon4.setVisibility(View.INVISIBLE);
         pokeball4.setVisibility(View.INVISIBLE);
         pokemon4Name.setVisibility(View.INVISIBLE);
-
-        pokemon5.setVisibility(View.INVISIBLE);
         pokeball5.setVisibility(View.INVISIBLE);
         pokemon5Name.setVisibility(View.INVISIBLE);
-        pokemon6.setVisibility(View.INVISIBLE);
         pokeball6.setVisibility(View.INVISIBLE);
         pokemon6Name.setVisibility(View.INVISIBLE);
 
@@ -165,7 +165,6 @@ public class SecondFragment extends Fragment {
                         pokemon1Name.setText(pokemon.getName());
                         bFreePokemon1.setVisibility(View.VISIBLE);
 
-                        pokemon1.setVisibility(View.VISIBLE);
                         pokeball1.setVisibility(View.VISIBLE);
                         pokemon1Name.setVisibility(View.VISIBLE);
                     } catch (Exception e) {
@@ -181,7 +180,6 @@ public class SecondFragment extends Fragment {
                         pokemon2Name.setText(pokemon.getName());
                         bFreePokemon2.setVisibility(View.VISIBLE);
 
-                        pokemon2.setVisibility(View.VISIBLE);
                         pokeball2.setVisibility(View.VISIBLE);
                         pokemon2Name.setVisibility(View.VISIBLE);
 
@@ -197,7 +195,6 @@ public class SecondFragment extends Fragment {
                         pokemon3Name.setText(pokemon.getName());
                         bFreePokemon3.setVisibility(View.VISIBLE);
 
-                        pokemon3.setVisibility(View.VISIBLE);
                         pokeball3.setVisibility(View.VISIBLE);
                         pokemon3Name.setVisibility(View.VISIBLE);
 
@@ -213,7 +210,6 @@ public class SecondFragment extends Fragment {
                         pokemon4Name.setText(pokemon.getName());
                         bFreePokemon4.setVisibility(View.VISIBLE);
 
-                        pokemon4.setVisibility(View.VISIBLE);
                         pokeball4.setVisibility(View.VISIBLE);
                         pokemon4Name.setVisibility(View.VISIBLE);
 
@@ -229,7 +225,6 @@ public class SecondFragment extends Fragment {
                         pokemon5Name.setText(pokemon.getName());
                         bFreePokemon5.setVisibility(View.VISIBLE);
 
-                        pokemon5.setVisibility(View.VISIBLE);
                         pokeball5.setVisibility(View.VISIBLE);
                         pokemon5Name.setVisibility(View.VISIBLE);
 
@@ -245,7 +240,6 @@ public class SecondFragment extends Fragment {
                         pokemon6Name.setText(pokemon.getName());
                         bFreePokemon6.setVisibility(View.VISIBLE);
 
-                        pokemon6.setVisibility(View.VISIBLE);
                         pokeball6.setVisibility(View.VISIBLE);
                         pokemon6Name.setVisibility(View.VISIBLE);
                     } catch (Exception e) {
