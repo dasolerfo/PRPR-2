@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -56,6 +57,8 @@ public class PokemonDetail extends Fragment {
     private LayoutInflater inflater;
 
     private PokemonDao pokemonDao;
+
+    private boolean stateFoto = false;
     public PokemonDetail() {
         // Required empty public constructor
     }
@@ -154,6 +157,20 @@ public class PokemonDetail extends Fragment {
     private void setImage() {
         ImageView imageView = getView().findViewById(R.id.fotoPerfil);
         Picasso.get().load(pokemon.getSprites().getFront_default()).into(imageView);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stateFoto = !stateFoto;
+
+
+                if (stateFoto){
+                    Picasso.get().load(pokemon.getSprites().getBack_default()).into(imageView);
+                }else {
+                    Picasso.get().load(pokemon.getSprites().getFront_default()).into(imageView);
+                }
+            }
+        });
     }
 
     private void creacioTypes() {
@@ -233,6 +250,17 @@ public class PokemonDetail extends Fragment {
         setImage();
 
         setStats();
+
+        ImageView imageView = getView().findViewById(R.id.comeBack);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (((AppCompatActivity) v.getContext()).getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    ((AppCompatActivity) v.getContext()).getSupportFragmentManager().popBackStack();  }
+            }
+        });
 
 
         Button button = this.getView().findViewById(R.id.capturar);
@@ -473,7 +501,7 @@ public class PokemonDetail extends Fragment {
     public void setDescription(String description) {
         pokemon.setDescription(description);
         TextView descripcio = (TextView) getView().findViewById(R.id.description);
-        descripcio.setText(description);
+        descripcio.setText(description.replace("\n", " "));
     }
 
     private int getStaticsPokemon(){

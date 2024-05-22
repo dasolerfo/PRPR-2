@@ -30,5 +30,10 @@ public class Sprites implements Serializable {
     public String getFront_shiny() {
         return front_shiny;
     }
+
+    public void isShiny() {
+        this.back_default = back_shiny;
+        this.front_default = front_shiny;
+    }
 }
 

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.android.volley.toolbox.Volley;
 import com.example.pokedexls.Entity.Pokemon;
 import com.example.pokedexls.Entity.Trainer;
 import com.example.pokedexls.Persistence.PokemonDao;
@@ -43,6 +44,10 @@ public class PokedexFragment extends Fragment {
     private PokemonDao pokemonDao = new PokemonDao(this);
     private Trainer trainer;
     private String searchQuery;
+    private boolean refresh = true;
+    private boolean recarrega = false;
+
+
     //private ArrayList<Pokemon> pokemons= new ArrayList<>();
 
     /**
@@ -87,13 +92,25 @@ public class PokedexFragment extends Fragment {
     }
 
     public void afegirPokemonsRecycler(Pokemon[] llistaPokemons){
-        adapter.addPokemons(llistaPokemons);
-        progressBar.setVisibility(View.INVISIBLE);
-        getActivity().runOnUiThread(new Runnable() {
-            public void run() {
-                adapter.notifyDataSetChanged();
+        if (isAdded()) {
+            if (!recarrega){
+                adapter.addPokemons(llistaPokemons);
+                progressBar.setVisibility(View.INVISIBLE);
+                pokemonDao.setNewPointers();
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
+            } else {
+                recarrega = false;
+                pokemonDao.resetPointers();
+                demanarNousPokemons();
             }
-        });
+
+        }
+
     }
 
     @Override
@@ -113,31 +130,34 @@ public class PokedexFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            if (pokemonDao.haFetCrida()) {
+            if (pokemonDao.haFetCrida() & adapter == null ||  adapter.getItemCount() > 0) {
                 adapter = new MyPokemonRecyclerViewAdapter(trainer);
                 recyclerView.setAdapter(adapter);
-                demanarNousPokemons();
+                //demanarNousPokemons();
             } else {
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-               // pokemonDao.resetPointers();
+
             }
 
 
             nestedScrollView.setOnScrollChangeListener(new  NestedScrollView.OnScrollChangeListener() {
                 @Override
                 public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
-                    if ( i1 == nestedScrollView.getChildAt(0).getMeasuredHeight() - nestedScrollView.getMeasuredHeight()){
+                    if (refresh){
+                        if ( i1 == nestedScrollView.getChildAt(0).getMeasuredHeight() - nestedScrollView.getMeasuredHeight()){
                             progressBar.setVisibility(View.VISIBLE);
-                           demanarNousPokemons();
-
+                            demanarNousPokemons();
+                        }
                     }
+
                 }
 
             });
             this.searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     getQuery();
                 }
             });
@@ -151,8 +171,10 @@ public class PokedexFragment extends Fragment {
         this.pokemonDao.resetPointers();
         String searchQuery = this.textInputEditText.getText().toString();
         if (!searchQuery.equals("")){
+            this.refresh = false;
             this.pokemonDao.demanarPokemonsQuery(this.getContext(), searchQuery);
         } else {
+            this.refresh = true;
             demanarNousPokemons();
         }
 
@@ -166,4 +188,35 @@ public class PokedexFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (adapter.getItemCount() == 0 && !pokemonDao.isCooking())
+        {
+            pokemonDao.resetPointers();
+            demanarNousPokemons();
+        } else if (pokemonDao.isCooking())  {
+            recarrega = true;
+        } else {
+            pokemonDao.resetPointers();
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
 }
+
