@@ -6,16 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".TrainerName">
 
+
+
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="438dp"
-        android:layout_height="747dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginStart="-10dp"
-        android:alpha="0.7"
-        android:src="@drawable/fondo_nom"
+        android:id="@+id/imageView12"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.6"
+        android:background="@drawable/user_ladrillos"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
     <EditText
@@ -30,7 +32,7 @@
         android:inputType="text"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+        app:layout_constraintTop_toTopOf="@+id/imageView12" />
 
     <ImageButton
         android:id="@+id/bSend"
