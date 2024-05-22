@@ -22,11 +22,19 @@
         android:orientation="vertical"
         android:id="@+id/fonsDetalls">
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_keyboard_double_arrow_left_24"
+            app:tint="@color/white"
+            android:id="@+id/comeBack"
+            />
         <!-- TODO: Update blank fragment layout -->
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="300dp"
             android:src="@drawable/trainer"
+            android:layout_gravity="center"
             android:id="@+id/fotoPerfil"/>
 
         <LinearLayout
@@ -107,6 +115,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:textSize="18sp"
+                android:layout_gravity="center"
                 android:fontFamily="sans-serif-condensed"
                 android:text="" />
 
