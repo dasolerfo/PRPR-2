@@ -10,6 +10,8 @@ public class Stats implements Serializable {
     public int getBase_stat() {
         return base_stat;
     }
+
+
 }
 
 

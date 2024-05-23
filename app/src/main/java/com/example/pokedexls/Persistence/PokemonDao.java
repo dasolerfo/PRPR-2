@@ -24,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.Random;
 
 public class PokemonDao extends Thread implements Serializable {
     private int punterIncial = 1;
@@ -31,7 +32,7 @@ public class PokemonDao extends Thread implements Serializable {
     private Pokemon[] pokemons = new Pokemon[15];
     private int totalPokemonsRequested = 0;
     private boolean flag = false;
-
+    boolean isCookingLoad = false;
     private PokedexFragment pokemonFragment;
     private PokemonDetail pokemonDetail;
 
@@ -42,8 +43,10 @@ public class PokemonDao extends Thread implements Serializable {
     public PokemonDao(){}
 
     public void demanarPokemonsRecycler(Context context) {
-        for (int i = punterIncial; i < punterFinal; i++) {
-            makeRequest(i, context);
+        int pos = 0;
+        isCookingLoad = true;
+        for (int i = punterIncial; i < punterFinal; i++, pos++) {
+            makeRequest(i, pos, context);
         }
     }
 
@@ -53,9 +56,10 @@ public class PokemonDao extends Thread implements Serializable {
         return pokemons;
     }
 
-    private void makeRequest(int id, Context context) {
+    private void makeRequest(int id, int posicion, Context context) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url ="https://pokeapi.co/api/v2/pokemon/"+ id;
+
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -75,22 +79,21 @@ public class PokemonDao extends Thread implements Serializable {
                             pokemon.setAbilities(gson.fromJson(response.getJSONArray("abilities").toString(), Ability[].class));
                             pokemon.setUrlDescription(response.getJSONObject("species").getString("url"));
 
-
-
-
+                            Random r = new Random();
+                            if ((r.nextInt(499))  == 10){
+                                pokemon.isShiny();
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
 
-                        pokemons[id - punterIncial] = pokemon;
+                        pokemons[posicion] = pokemon;
                         totalPokemonsRequested++;
 
                         if (totalPokemonsRequested >= 15) {
-                            totalPokemonsRequested = 0;
-                            punterIncial += 15;
-                            punterFinal += 15;
+                            isCookingLoad = false;
                             pokemonFragment.afegirPokemonsRecycler(pokemons);
                         }
 
@@ -109,9 +112,15 @@ public class PokemonDao extends Thread implements Serializable {
         queue.add(jsonObjectRequest);
     }
 
+    public void setNewPointers(){
+        totalPokemonsRequested = 0;
+        punterIncial += 15;
+        punterFinal += 15;
+    }
+
     public void demanarPokemonsQuery(Context context, String searchQuery) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url ="https://pokeapi.co/api/v2/pokemon";
+        String url ="https://pokeapi.co/api/v2/pokemon?offset=0&limit=1302";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -229,6 +238,7 @@ public class PokemonDao extends Thread implements Serializable {
                 }
                 );
         queue.add(jsonObjectRequest);
+
     }
 
     private void demanarPokemonConcret(Context context, String query) {
@@ -240,7 +250,25 @@ public class PokemonDao extends Thread implements Serializable {
                     @Override
                     public void onResponse(JSONObject response) {
                         Gson gson = new Gson();
-                        Pokemon pokemon =  gson.fromJson(response.toString(), Pokemon.class);
+                        Pokemon pokemon = new Pokemon();
+                        try {
+                            pokemon.setName(response.getString("name"));
+                            pokemon.setStats(gson.fromJson(response.getJSONArray("stats").toString(),
+                                    Stats[].class));
+                            pokemon.setTypes(gson.fromJson(response.getJSONArray("types").toString(), PokemonType[].class));
+                            pokemon.setSprites(gson.fromJson(response.getJSONObject("sprites").toString(), Sprites.class));
+                            pokemon.setAbilities(gson.fromJson(response.getJSONArray("abilities").toString(), Ability[].class));
+                            pokemon.setUrlDescription(response.getJSONObject("species").getString("url"));
+
+                            Random r = new Random();
+                            if ((r.nextInt(499))  == 10){
+                                pokemon.isShiny();
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         pokemonFragment.afegirPokemon(pokemon);
 
 
@@ -276,5 +304,9 @@ public class PokemonDao extends Thread implements Serializable {
         this.pokemonDetail = pokemonDetail;
         demamanarDescripcioPokemon(pokemon.getUrlDescription(), pokemon.getName(), pokemonDetail.getContext());
 
+    }
+
+    public boolean isCooking() {
+        return isCookingLoad;
     }
 }

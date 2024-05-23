@@ -17,6 +17,9 @@
     <string name="trainer_edit_name">Change the name of your trainer</string>
     <string name="trainer_hint">Write a name:</string>
 
+    <string name="cantfreepokemon">Oh, Oh, OH! You can not release the pokemon!</string>
+    <string name="freepokemon">You have released a pokemon!</string>
+
     <string name="text_pokeball">Preu: 200€</string>
     <string name="text_superball">Preu: 500€</string>
     <string name="text_ultraball">Preu: 1.500€</string>

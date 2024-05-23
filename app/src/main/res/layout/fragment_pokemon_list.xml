@@ -25,7 +25,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/textField"/>
+                android:id="@+id/textField"
+                android:singleLine="true"/>
 
             <ImageView
                 android:layout_width="match_parent"
@@ -35,15 +36,15 @@
                 android:id="@+id/botoBusca"/>
         </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".PokedexFragment"
-        tools:listitem="@layout/fragment_pokedex"
-        android:nestedScrollingEnabled="false"
-        android:id="@+id/list"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="false"
+            tools:context=".PokedexFragment"
+            tools:listitem="@layout/fragment_pokedex" />
 
-    <ProgressBar
+        <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/progress_circular"/>

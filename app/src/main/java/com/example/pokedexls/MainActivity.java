@@ -44,8 +44,9 @@ public abstract class MainActivity extends AppCompatActivity implements TrainerU
         }
 
         firstFragment = PokedexFragment.newInstance(0, trainer);
-        //secondFragment = SecondFragment.newInstance(trainer);
+        secondFragment = SecondFragment.newInstance(trainer);
         thirdFragment = ShopFragment.newInstance(trainer);
+
         loadFragment(firstFragment);
 
         navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -82,7 +83,7 @@ public abstract class MainActivity extends AppCompatActivity implements TrainerU
         sharedPrefManager.saveTrainer(trainer);
 
         firstFragment = PokedexFragment.newInstance(0, trainer);
-        //secondFragment = SecondFragment.newInstance(trainer);
+        secondFragment = SecondFragment.newInstance(trainer);
         thirdFragment = ShopFragment.newInstance(trainer);
     }
 

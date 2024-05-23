@@ -63,6 +63,8 @@ public class Pokemon implements Serializable {
     private int ballCaptured;
 
 
+
+
     public Ability[] getAbilities() {
         return abilities;
     }
@@ -126,5 +128,9 @@ public class Pokemon implements Serializable {
 
     public void setBallCaptured(int ballCaptured) {
         this.ballCaptured = ballCaptured;
+    }
+
+    public void isShiny() {
+        this.sprites.isShiny();
     }
 }
