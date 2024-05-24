@@ -22,4 +22,5 @@ Per a un funcionament correcte, es recomana utilitzar com a simulador el disposi
        el botó amb el "check blau" del teclat virtual. Per últim, pitjar sobre el botó d'enviar disponible a la pantalla.
 4. Shop
     1. Es pot modificar el nombre i tipus de pokeballs desitjades utilitzant els botons de més o menys o, d'altra banda,
-       editant els textos disponibles a la zona inferior de cada element.       
+       editant els textos disponibles a la zona inferior de cada element.      
+    2. Per a comprar els diferents objectes, clicar la bossa amb la moneda.    
